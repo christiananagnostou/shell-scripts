@@ -15,6 +15,6 @@ do
   fi
 done
 
-numLines=$( eval $pipeline | wc -l | tr -s ' ' )
+numLines=$( eval $pipeline | wc -l | xargs )
 echo '-------------------------------------------------'
-echo "There are currently$numLines users in /etc/passwd"
+echo "There are $numLines users in /etc/passwd"
