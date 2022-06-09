@@ -1,0 +1,20 @@
+#! /bin/bash 
+
+# Search all files and nested files for a term and display files to STDOUT
+# Usage - DeepSearch [search_term] [dir_to_search] [dir_to_copy_to]
+
+# $1 - Required term to use for deep search (syntax for using wildcards: ".*main.*.liquid") 
+# $2 - Optional directory to deep search in. Defaults to current directory
+# $3 - Optional directory to copy matching files into
+
+target_dir=$(pwd)
+[[ $2 != '' ]] && target_dir=$2
+
+matching_files=$(find $target_dir | grep $1)
+
+for file in $matching_files; do
+	if [[ -f $file ]]; then
+		echo $file
+		[[ $3 != '' ]] && cp $file $3
+	fi
+done
